@@ -36,7 +36,7 @@ public class CardController {
     @PostMapping("/trusted")
     ResponseEntity<Card> addTrustedCard(@RequestBody CardInput cardInput) {
         Card newCard = inputToCard.map(cardInput, "T", "Known");
-        newCard = cardServices.add(newCard);
+        newCard = cardServices.save(newCard);
         return new ResponseEntity<>(newCard, HttpStatus.OK);
     }
 
