@@ -1,0 +1,2 @@
+INSERT INTO ADDRESS_BOOK (CARD_ID, ADDRESS, NAME,  SOURCE,  STATE)
+VALUES (100000, 'Beror Hayil', 'Eitan Volach', 'U', 'Unknown');

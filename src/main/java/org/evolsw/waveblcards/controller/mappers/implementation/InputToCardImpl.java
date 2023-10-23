@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class InputToCardImpl implements InputToCard {
-    public Card map(CardInput cardInput, String source)
+    public Card map(CardInput cardInput, String source, String state)
     {
         Card card = new Card();
         card.setSource(source);
-        card.setStatus("New");
+        card.setState(state);
         card.setName(cardInput.getName());
         card.setAddress(cardInput.getAddress());
         return card;

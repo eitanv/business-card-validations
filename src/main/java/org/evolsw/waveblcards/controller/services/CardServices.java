@@ -11,5 +11,5 @@ public interface CardServices {
 
     Card load(Long id);
 
-    public Card add(Card card);
+    public Card save(Card card);
 }

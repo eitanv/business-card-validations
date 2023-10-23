@@ -13,7 +13,7 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "start@100001")
     Long cardId;
     String source;
-    String status;
+    String state;
     String name;
     String address;
 }
