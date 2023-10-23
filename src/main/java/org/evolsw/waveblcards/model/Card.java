@@ -16,4 +16,5 @@ public class Card {
     String state;
     String name;
     String address;
+    Long lastVerificationCode;
 }

@@ -55,6 +55,7 @@ public class CardController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
         card.setState(state);
+        card.setLastVerificationCode(stateServices.generateVerificationCode());
         card = cardServices.save(card);
         return new ResponseEntity<>(card, HttpStatus.OK);
     }

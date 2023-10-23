@@ -5,4 +5,6 @@ import org.evolsw.waveblcards.controller.data.StateMachineData;
 public interface StateServices {
 
     boolean verifyNewState(StateMachineData stateMachineData);
+
+    Long generateVerificationCode();
 }

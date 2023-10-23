@@ -12,14 +12,15 @@ public class StateServicesImpl implements StateServices {
 
     static Set<StateMachineData> stateMachine = new HashSet<>();
 
+    //TODO load from @Configuration/file
     public StateServicesImpl() {
         stateMachine.add(new StateMachineData("Manual Approved", "Known", "T"));
         stateMachine.add(new StateMachineData("Known", "Manual Approved", "T"));
-        //TODO Split to two sets
-        stateMachine.add(new StateMachineData("Pending", "Unknown", "U"));
-        stateMachine.add(new StateMachineData("Unknown", "Pending", "U"));
-        stateMachine.add(new StateMachineData("Strong Approved", "Pending", "U"));
-        stateMachine.add(new StateMachineData("Pending", "Strong Approved", "U"));
+        //TODO Split to two sets with factory
+        stateMachine.add(new StateMachineData("Pending Verification", "Unknown", "U"));
+        stateMachine.add(new StateMachineData("Unknown", "Pending Verification", "U"));
+        stateMachine.add(new StateMachineData("Strong Approved", "Pending Verification", "U"));
+        stateMachine.add(new StateMachineData("Pending Verification", "Strong Approved", "U"));
     }
 
     @Override
@@ -28,4 +29,11 @@ public class StateServicesImpl implements StateServices {
         result = stateMachine.contains(stateMachineData);
         return result;
     }
+
+    @Override
+    public Long generateVerificationCode() {
+        return (long) (Math.random() * 1000000000);
+    }
+
+
 }
