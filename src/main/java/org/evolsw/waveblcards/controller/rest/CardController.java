@@ -1,6 +1,7 @@
 package org.evolsw.waveblcards.controller.rest;
 
-import org.evolsw.waveblcards.controller.dto.CardInput;
+import org.evolsw.waveblcards.controller.data.CardInput;
+import org.evolsw.waveblcards.controller.data.StateMachineData;
 import org.evolsw.waveblcards.controller.mappers.implementation.InputToCardImpl;
 import org.evolsw.waveblcards.controller.services.CardServices;
 import org.evolsw.waveblcards.controller.services.StateServices;
@@ -50,7 +51,7 @@ public class CardController {
     @PutMapping("/{id}/state={state}/")
     ResponseEntity<Card> changeState(@PathVariable Long id, @PathVariable String state) {
         Card card = cardServices.load(id);
-        if (!stateServices.verifyNewState(id, state)) {
+        if (!stateServices.verifyNewState(new StateMachineData(card.getState(), state, card.getSource()))) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
         card.setState(state);

@@ -1,4 +1,4 @@
-package org.evolsw.waveblcards.controller.dto;
+package org.evolsw.waveblcards.controller.data;
 
 import lombok.Data;
 

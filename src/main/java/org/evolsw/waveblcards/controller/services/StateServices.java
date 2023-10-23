@@ -1,6 +1,8 @@
 package org.evolsw.waveblcards.controller.services;
 
+import org.evolsw.waveblcards.controller.data.StateMachineData;
+
 public interface StateServices {
 
-    boolean verifyNewState(Long cardId, String newState);
+    boolean verifyNewState(StateMachineData stateMachineData);
 }
