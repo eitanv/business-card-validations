@@ -10,7 +10,6 @@ import org.evolsw.waveblcards.controller.services.StateServices;
 import org.evolsw.waveblcards.model.Card;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +33,7 @@ public class CardController {
         this.stateServices = stateServices;
         this.randomServices = randomServices;
     }
+
     @GetMapping("/")
     ResponseEntity<List<Card>> getAllCards() {
         logger.info("{GET [/cards/]}: getAllCards() REST called");

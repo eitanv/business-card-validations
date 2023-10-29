@@ -5,10 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class WaveBlCardsApplication {
+    public static void main(String[] args) {
 
-	public static void main(String[] args) {
-
-		SpringApplication.run(WaveBlCardsApplication.class, args);
-	}
+        SpringApplication.run(WaveBlCardsApplication.class, args);
+    }
 
 }
