@@ -23,19 +23,17 @@ import java.util.List;
 public class CardController {
 
     private final Logger logger = LoggerFactory.getLogger(CardController.class);
-
-    @Autowired
     CardServices cardServices;
-
-    @Autowired
     InputToCardImpl inputToCard;
-
-    @Autowired
     StateServices stateServices;
-
-    @Autowired
     RandomServices randomServices;
 
+    public CardController(CardServices cardServices, InputToCardImpl inputToCard, StateServices stateServices, RandomServices randomServices) {
+        this.cardServices = cardServices;
+        this.inputToCard = inputToCard;
+        this.stateServices = stateServices;
+        this.randomServices = randomServices;
+    }
     @GetMapping("/")
     ResponseEntity<List<Card>> getAllCards() {
         logger.info("{GET [/cards/]}: getAllCards() REST called");
@@ -47,27 +45,27 @@ public class CardController {
     @PostMapping("/trusted")
     ResponseEntity<Card> addTrustedCard(@RequestBody CardInput cardInput) {
         logger.info("{POST [/cards/trusted]}: addTrustedCard(CardInput) REST called");
-        logger.debug("addTrustedCard() inputs: " + cardInput);
+        logger.debug("addTrustedCard(CardInput) inputs: " + cardInput);
         Card newCard = inputToCard.map(cardInput, "T", "Known");
         newCard = cardServices.save(newCard);
-        logger.debug("addTrustedCard() New Card: " + newCard);
+        logger.debug("addTrustedCard(CardInput) New Card: " + newCard);
         return new ResponseEntity<>(newCard, HttpStatus.OK);
     }
 
     @PostMapping("/untrusted")
     ResponseEntity<Card> addUntrustedCard(@RequestBody CardInput cardInput) {
         logger.info("{POST [/cards/untrusted]}: addUntrustedCard(CardInput) REST called");
-        logger.debug("addUntrustedCard() inputs: " + cardInput);
+        logger.debug("addUntrustedCard(CardInput) inputs: " + cardInput);
         Card newCard = inputToCard.map(cardInput, "U", "Unknown");
         newCard = cardServices.save(newCard);
-        logger.debug("addUntrustedCard() New Card: " + newCard);
+        logger.debug("addUntrustedCard(CardInput) New Card: " + newCard);
         return new ResponseEntity<>(newCard, HttpStatus.OK);
     }
 
     @PutMapping("/card/state")
     ResponseEntity<Card> changeState(@RequestBody ChangeStateInput changeStateInput) {
         logger.info("{PUT [/cards/card/state]}: changeState(ChangeStateInput) REST called");
-        logger.debug("changeState() inputs: " + changeStateInput);
+        logger.debug("changeState(ChangeStateInput) inputs: " + changeStateInput);
         Card card = cardServices.load(changeStateInput.getCardId());
         if (!stateServices.verifyNewState(new StateMachineData(card.getState(), changeStateInput.getNewState(), card.getSource()))) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -75,7 +73,7 @@ public class CardController {
         card.setState(changeStateInput.getNewState());
         Long lastVerificationCode = randomServices.generateVerificationCode();
         card.setLastVerificationCode(lastVerificationCode);
-        logger.info("changeState() verification code: " + lastVerificationCode);
+        logger.info("changeState(ChangeStateInput) verification code: " + lastVerificationCode);
         card = cardServices.save(card);
         return new ResponseEntity<>(card, HttpStatus.OK);
     }
