@@ -30,10 +30,5 @@ public class StateServicesImpl implements StateServices {
         return result;
     }
 
-    @Override
-    public Long generateVerificationCode() {
-        return (long) (Math.random() * 1000000000);
-    }
-
 
 }

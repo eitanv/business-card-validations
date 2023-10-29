@@ -6,5 +6,4 @@ public interface StateServices {
 
     boolean verifyNewState(StateMachineData stateMachineData);
 
-    Long generateVerificationCode();
 }
