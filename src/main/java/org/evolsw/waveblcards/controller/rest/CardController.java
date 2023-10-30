@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.evolsw.waveblcards.controller.consts.SourceConsts;
+import org.evolsw.waveblcards.controller.consts.StateConsts;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,20 +40,40 @@ public class CardController {
     ResponseEntity<List<Card>> getAllCards() {
         logger.info("{GET [/cards/]}: getAllCards() REST called");
         List<Card> allCards = cardServices.loadAll();
-        logger.debug("getAllCards() : All cards: " + Arrays.toString(allCards.toArray()));
+        logger.debug("getAllCards() : All cards are " + Arrays.toString(allCards.toArray()));
         return new ResponseEntity<>(allCards, HttpStatus.OK);
     }
 
     @PostMapping("/trusted")
     ResponseEntity<Card> addTrustedCard(@RequestBody CardInput cardInput) {
-        logger.info("{POST [/cards/trusted]}: addTrustedCard(CardInput) REST called");
-        logger.debug("addTrustedCard(CardInput) inputs: " + cardInput);
-        Card newCard = inputToCard.map(cardInput, "T", "Known");
-        newCard = cardServices.save(newCard);
-        logger.debug("addTrustedCard(CardInput) New Card: " + newCard);
+        Card newCard = createCard(cardInput, true);
         return new ResponseEntity<>(newCard, HttpStatus.OK);
     }
 
+    @PostMapping("/untrusted")
+    ResponseEntity<Card> addUntrustedCard(@RequestBody CardInput cardInput) {
+        Card newCard = createCard(cardInput, false);
+        return new ResponseEntity<>(newCard, HttpStatus.OK);
+    }
+
+
+    private Card createCard(CardInput cardInput, boolean isTrusted) {
+        final String METHOD_NAME = isTrusted ?  "addTrustedCard(CardInput)" : "addUnTrustedCard(CardInput)";
+        logger.info("{POST [/cards/" + (isTrusted ? "trusted":"untrusted") + "]}: "+METHOD_NAME+" REST called");
+        logger.debug(METHOD_NAME+" inputs: " + cardInput);
+        final String source = isTrusted ? SourceConsts.TRUSTED_SOURCE : SourceConsts.UNTRUSTED_SOURCE;
+        final String state = isTrusted ? StateConsts.KNOWN : StateConsts.UNKNOWN;
+
+        Card newCard = inputToCard.map(cardInput, source, state);
+        newCard = cardServices.save(newCard); //Had to reassign to get the generated ID
+
+        logger.debug(METHOD_NAME+" New Card: " + newCard);
+        return newCard;
+    }
+
+
+
+/*
     @PostMapping("/untrusted")
     ResponseEntity<Card> addUntrustedCard(@RequestBody CardInput cardInput) {
         logger.info("{POST [/cards/untrusted]}: addUntrustedCard(CardInput) REST called");
@@ -61,6 +83,7 @@ public class CardController {
         logger.debug("addUntrustedCard(CardInput) New Card: " + newCard);
         return new ResponseEntity<>(newCard, HttpStatus.OK);
     }
+*/
 
     @PutMapping("/card/state")
     ResponseEntity<Card> changeState(@RequestBody ChangeStateInput changeStateInput) {
