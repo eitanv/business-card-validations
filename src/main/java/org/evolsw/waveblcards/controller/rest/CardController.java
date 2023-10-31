@@ -81,7 +81,9 @@ public class CardController {
         card.setState(changeStateInput.getNewState());
         Long lastVerificationCode = randomServices.generateVerificationCode();
         card.setLastVerificationCode(lastVerificationCode);
-        logger.info("changeState(ChangeStateInput) verification code: " + lastVerificationCode);
-        return new ResponseEntity<>(cardServices.save(card), HttpStatus.OK);
+        logger.debug("changeState(ChangeStateInput) verification code: " + lastVerificationCode);
+        Card newCard = cardServices.save(card);
+        logger.info("changeState(ChangeStateInput) Change card: " + newCard);
+        return new ResponseEntity<>(newCard, HttpStatus.OK);
     }
 }
