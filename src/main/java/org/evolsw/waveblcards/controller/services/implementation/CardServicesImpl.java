@@ -1,6 +1,5 @@
 package org.evolsw.waveblcards.controller.services.implementation;
 
-import lombok.RequiredArgsConstructor;
 import org.evolsw.waveblcards.controller.services.CardServices;
 import org.evolsw.waveblcards.model.Card;
 import org.evolsw.waveblcards.model.jpa.CardRepository;
@@ -14,7 +13,6 @@ public class CardServicesImpl implements CardServices {
     final CardRepository cardRepository;
 
     public CardServicesImpl(CardRepository cardRepository) {
-
         this.cardRepository = cardRepository;
     }
 
