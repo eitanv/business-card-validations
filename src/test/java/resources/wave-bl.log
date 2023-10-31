@@ -1,0 +1,51 @@
+2023-11-01 00:35:22,065 INFO o.e.w.WaveBlCardsApplication Starting WaveBlCardsApplication using Java 21 with PID 16584 (C:\Eitan\git\wave-bl-cards\target\classes started by eitan in C:\Eitan\git\wave-bl-cards)
+2023-11-01 00:35:22,079 DEBUG o.e.w.WaveBlCardsApplication Running with Spring Boot v3.1.5, Spring v6.0.13
+2023-11-01 00:35:22,086 INFO o.e.w.WaveBlCardsApplication The following 1 profile is active: "default"
+2023-11-01 00:35:24,591 INFO o.s.d.r.c.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-11-01 00:35:24,729 INFO o.s.d.r.c.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 120 ms. Found 1 JPA repository interfaces.
+2023-11-01 00:35:26,268 INFO o.s.b.w.e.t.TomcatWebServer Tomcat initialized with port(s): 8091 (http)
+2023-11-01 00:35:26,294 INFO o.a.c.c.StandardService Starting service [Tomcat]
+2023-11-01 00:35:26,295 INFO o.a.c.c.StandardEngine Starting Servlet engine: [Apache Tomcat/10.1.15]
+2023-11-01 00:35:26,559 INFO o.a.c.c.C.[.[.[/] Initializing Spring embedded WebApplicationContext
+2023-11-01 00:35:26,560 INFO o.s.b.w.s.c.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 4159 ms
+2023-11-01 00:35:26,665 INFO c.z.h.HikariDataSource HikariPool-1 - Starting...
+2023-11-01 00:35:27,276 INFO c.z.h.p.HikariPool HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2023-11-01 00:35:27,284 INFO c.z.h.HikariDataSource HikariPool-1 - Start completed.
+2023-11-01 00:35:27,319 INFO o.s.b.a.h.H2ConsoleAutoConfiguration H2 console available at '/h2'. Database available at 'jdbc:h2:mem:testdb'
+2023-11-01 00:35:28,006 INFO o.h.j.i.u.LogHelper HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-11-01 00:35:28,318 INFO o.h.Version HHH000412: Hibernate ORM core version 6.2.13.Final
+2023-11-01 00:35:28,335 INFO o.h.c.Environment HHH000406: Using bytecode reflection optimizer
+2023-11-01 00:35:29,151 INFO o.s.o.j.p.SpringPersistenceUnitInfo No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-11-01 00:35:31,382 INFO o.h.e.t.j.p.i.JtaPlatformInitiator HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-11-01 00:35:31,456 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-11-01 00:35:33,824 INFO o.s.b.w.e.t.TomcatWebServer Tomcat started on port(s): 8091 (http) with context path ''
+2023-11-01 00:35:33,863 INFO o.e.w.WaveBlCardsApplication Started WaveBlCardsApplication in 14.053 seconds (process running for 15.75)
+2023-11-01 00:35:36,659 INFO o.a.c.c.C.[.[.[/] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-01 00:35:36,660 INFO o.s.w.s.DispatcherServlet Initializing Servlet 'dispatcherServlet'
+2023-11-01 00:35:36,662 INFO o.s.w.s.DispatcherServlet Completed initialization in 2 ms
+2023-11-01 00:35:36,880 INFO o.e.w.c.r.CardController {POST [/cards/trusted]} REST called
+2023-11-01 00:35:36,881 DEBUG o.e.w.c.r.CardController addTrustedCard(CardInput) inputs: CardInput(name=Limor Volach, address=Beror Hayil 79152)
+2023-11-01 00:35:36,999 DEBUG o.e.w.c.r.CardController addTrustedCard(CardInput) New Card: Card(cardId=100001, source=T, state=Known, name=Limor Volach, address=Beror Hayil 79152, lastVerificationCode=null)
+2023-11-01 00:35:41,410 INFO o.e.w.c.r.CardController {POST [/cards/untrusted]} REST called
+2023-11-01 00:35:41,410 DEBUG o.e.w.c.r.CardController addUnTrustedCard(CardInput) inputs: CardInput(name=Ben Dor, address=Beror Hayil 79152)
+2023-11-01 00:35:41,415 DEBUG o.e.w.c.r.CardController addUnTrustedCard(CardInput) New Card: Card(cardId=100002, source=U, state=Unknown, name=Ben Dor, address=Beror Hayil 79152, lastVerificationCode=null)
+2023-11-01 00:35:45,600 INFO o.e.w.c.r.CardController {GET [/cards/]} REST called
+2023-11-01 00:35:45,963 DEBUG o.e.w.c.r.CardController getAllCards() : All cards are [Card(cardId=100000, source=U, state=Unknown, name=Eitan Volach, address=Beror Hayil, lastVerificationCode=null), Card(cardId=100001, source=T, state=Known, name=Limor Volach, address=Beror Hayil 79152, lastVerificationCode=null), Card(cardId=100002, source=U, state=Unknown, name=Ben Dor, address=Beror Hayil 79152, lastVerificationCode=null)]
+2023-11-01 00:35:50,041 INFO o.e.w.c.r.CardController {PUT [/cards/card/state]} REST called
+2023-11-01 00:35:50,043 DEBUG o.e.w.c.r.CardController changeState(ChangeStateInput) inputs: ChangeStateInput(newState=Pending Verification, cardId=100000)
+2023-11-01 00:35:50,136 DEBUG o.e.w.c.r.CardController changeState(ChangeStateInput) verification code: 188923789
+2023-11-01 00:35:50,181 INFO o.e.w.c.r.CardController changeState(ChangeStateInput) Change card: Card(cardId=100000, source=U, state=Pending Verification, name=Eitan Volach, address=Beror Hayil, lastVerificationCode=188923789)
+2023-11-01 00:35:53,480 INFO o.e.w.c.r.CardController {PUT [/cards/card/state]} REST called
+2023-11-01 00:35:53,480 DEBUG o.e.w.c.r.CardController changeState(ChangeStateInput) inputs: ChangeStateInput(newState=Pending Verification, cardId=100002)
+2023-11-01 00:35:53,484 DEBUG o.e.w.c.r.CardController changeState(ChangeStateInput) verification code: 45349107
+2023-11-01 00:35:53,488 INFO o.e.w.c.r.CardController changeState(ChangeStateInput) Change card: Card(cardId=100002, source=U, state=Pending Verification, name=Ben Dor, address=Beror Hayil 79152, lastVerificationCode=45349107)
+2023-11-01 00:35:56,689 INFO o.e.w.c.r.CardController {PUT [/cards/card/state]} REST called
+2023-11-01 00:35:56,690 DEBUG o.e.w.c.r.CardController changeState(ChangeStateInput) inputs: ChangeStateInput(newState=Manual Approved, cardId=100001)
+2023-11-01 00:35:56,696 DEBUG o.e.w.c.r.CardController changeState(ChangeStateInput) verification code: 719629228
+2023-11-01 00:35:56,700 INFO o.e.w.c.r.CardController changeState(ChangeStateInput) Change card: Card(cardId=100001, source=T, state=Manual Approved, name=Limor Volach, address=Beror Hayil 79152, lastVerificationCode=719629228)
+2023-11-01 00:35:59,973 INFO o.e.w.c.r.CardController {PUT [/cards/card/state]} REST called
+2023-11-01 00:35:59,974 DEBUG o.e.w.c.r.CardController changeState(ChangeStateInput) inputs: ChangeStateInput(newState=Strong Approved, cardId=100002)
+2023-11-01 00:35:59,978 DEBUG o.e.w.c.r.CardController changeState(ChangeStateInput) verification code: 890204903
+2023-11-01 00:35:59,982 INFO o.e.w.c.r.CardController changeState(ChangeStateInput) Change card: Card(cardId=100002, source=U, state=Strong Approved, name=Ben Dor, address=Beror Hayil 79152, lastVerificationCode=890204903)
+2023-11-01 00:36:03,208 INFO o.e.w.c.r.CardController {GET [/cards/]} REST called
+2023-11-01 00:36:03,214 DEBUG o.e.w.c.r.CardController getAllCards() : All cards are [Card(cardId=100000, source=U, state=Pending Verification, name=Eitan Volach, address=Beror Hayil, lastVerificationCode=188923789), Card(cardId=100001, source=T, state=Manual Approved, name=Limor Volach, address=Beror Hayil 79152, lastVerificationCode=719629228), Card(cardId=100002, source=U, state=Strong Approved, name=Ben Dor, address=Beror Hayil 79152, lastVerificationCode=890204903)]
