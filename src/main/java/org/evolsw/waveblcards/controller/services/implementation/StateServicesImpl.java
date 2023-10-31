@@ -18,6 +18,11 @@ public class StateServicesImpl implements StateServices {
     public StateServicesImpl() {
         stateMachine.add(new StateMachineData(StateConsts.MANUAL_APPROVED, StateConsts.KNOWN, SourceConsts.TRUSTED_SOURCE));
         stateMachine.add(new StateMachineData(StateConsts.KNOWN, StateConsts.MANUAL_APPROVED, SourceConsts.TRUSTED_SOURCE));
+        //Additional states to support improved state machine
+        stateMachine.add(new StateMachineData(StateConsts.KNOWN, StateConsts.PENDING_VERIFICATION, SourceConsts.TRUSTED_SOURCE));
+        stateMachine.add(new StateMachineData(StateConsts.PENDING_VERIFICATION, StateConsts.KNOWN, SourceConsts.TRUSTED_SOURCE));
+        stateMachine.add(new StateMachineData(StateConsts.PENDING_VERIFICATION, StateConsts.STRONG_APPROVED, SourceConsts.TRUSTED_SOURCE));
+
         //TODO Split to two sets with factory
         stateMachine.add(new StateMachineData(StateConsts.PENDING_VERIFICATION, StateConsts.UNKNOWN, SourceConsts.UNTRUSTED_SOURCE));
         stateMachine.add(new StateMachineData(StateConsts.UNKNOWN, StateConsts.PENDING_VERIFICATION, SourceConsts.UNTRUSTED_SOURCE));
