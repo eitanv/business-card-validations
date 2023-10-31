@@ -1,5 +1,6 @@
 package org.evolsw.waveblcards.controller.services.implementation;
 
+import lombok.RequiredArgsConstructor;
 import org.evolsw.waveblcards.controller.services.CardServices;
 import org.evolsw.waveblcards.model.Card;
 import org.evolsw.waveblcards.model.jpa.CardRepository;
@@ -8,13 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CardServicesImpl implements CardServices {
 
     final CardRepository cardRepository;
-
-    public CardServicesImpl(CardRepository cardRepository) {
-        this.cardRepository = cardRepository;
-    }
 
     @Override
     public List<Card> loadAll() {
